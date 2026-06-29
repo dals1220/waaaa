@@ -31,7 +31,9 @@
             height: 100%;
             display: none !important; 
             flex-direction: column;
+            /* Centered vertically with a clean gap for mobile devices */
             justify-content: center;
+            gap: 25px;
             align-items: center;
             text-align: center;
             background-size: cover;
@@ -39,8 +41,7 @@
             background-repeat: no-repeat;
             padding: 40px 20px;
             background-color: #1a1a1a;
-            cursor: pointer; /* Indicates the entire screen is tappable */
-            gap: 25px;
+            cursor: pointer; /* Feedback showing the entire screen can be tapped */
         }
         .active {
             display: flex !important; 
@@ -59,15 +60,16 @@
             line-height: 1.2;
         }
 
+        /* Subtle animated helper indicator for mobile users */
         .tap-hint {
-            font-size: calc(1rem + 0.5vw);
+            font-size: calc(1rem + 0.6vw);
             opacity: 0.6;
             text-shadow: 1px 1px 5px #000;
-            animation: pulse 1.5s infinite alternate;
+            animation: pulseHint 1.5s infinite alternate;
             pointer-events: none;
         }
-        @keyframes pulse {
-            from { opacity: 0.4; }
+        @keyframes pulseHint {
+            from { opacity: 0.3; }
             to { opacity: 0.8; }
         }
         
@@ -176,7 +178,7 @@
 
     <div id="page1" class="page active" style="background-image: url('background.png');">
         <h1 class="fade-in">To Wasang Ponger: before u go i wana give u a little surprise :p press when ur readyy (flip ur phone horizontally!)</h1>
-        <p class="tap-hint">(tap anywhere to begin)</p>
+        <p class="tap-hint">(tap screen to start)</p>
     </div>
 
     <div id="page2" class="page" style="background-image: url('background.png');">
@@ -197,7 +199,7 @@
     </div>
 
     <div id="page3" class="page" style="background-image: url('flower1.png');">
-        <h1 class="fade-in neon-glow">Are u ready for biligual dalggggi!!</h1>
+        <h1 class="fade-in neon-glow">Are u ready for biligual dalgggii!!</h1>
         <img src="cry.png" alt="cry emoji" onerror="this.style.display='none'" style="max-height: 140px; width: auto; object-fit: contain; z-index: 4; pointer-events: none;">
         <p class="tap-hint">(tap screen to continue)</p>
     </div>
@@ -208,7 +210,7 @@
 
     <div id="page5" class="page" style="background-image: url('cat.png');">
         <button id="burstBtn">click!!!</button>
-        <p class="tap-hint">(tap anywhere else to continue)</p>
+        <p class="tap-hint">(tap anywhere else to finish)</p>
     </div>
 
     <div id="page6" class="page" style="background-image: url('kesh.png');">
@@ -248,21 +250,21 @@
             }
         }
 
-        // --- Global Screen Tap Navigation System ---
+        // --- Global Full Screen Tap Handler ---
         for (let i = 1; i <= totalPages; i++) {
             const pageEl = document.getElementById(`page${i}`);
             if (pageEl) {
-                const handleTap = (e) => {
-                    // Prevent advancing if the user taps the decorative burst button on Page 5
+                const triggerAction = (e) => {
+                    // Ignore page turn action if they explicitly clicked the burst buttons
                     if (e.target.id === 'burstBtn') return;
                     nextPage();
                 };
-                
-                pageEl.addEventListener('click', handleTap);
+
+                pageEl.addEventListener('click', triggerAction);
                 pageEl.addEventListener('touchstart', (e) => {
                     if (e.target.id === 'burstBtn') return;
-                    e.preventDefault(); // Prevents double triggers on phone screens
-                    nextPage();
+                    e.preventDefault(); // Suppresses synthetic click duplication on screens
+                    triggerAction(e);
                 }, { passive: false });
             }
         }
@@ -278,11 +280,11 @@
             }, 1900);
         }
 
-        // Particle Burst System
+        // Particle Burst
         const burstBtn = document.getElementById('burstBtn');
         if (burstBtn) {
             const burstAction = (e) => {
-                e.stopPropagation(); // Stops the page from turning instantly when tapping this button
+                e.stopPropagation(); // Stops parent container click triggers from executing instantly
                 
                 const rect = burstBtn.getBoundingClientRect();
                 const x = rect.left + rect.width / 2;
