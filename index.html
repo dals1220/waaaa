@@ -6,7 +6,7 @@
     <title>For Wasang Ponger :p</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght=700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -43,21 +43,24 @@
         .active {
             display: flex !important; 
         }
+        
+        /* Boosted Universal Word Size */
         h1, p {
-            font-size: 3.5rem; 
+            font-size: calc(2.4rem + 2.2vw); /* Larger, more impactful font size */
             font-weight: bold;
-            text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
-            max-width: 85%;
+            text-shadow: 2px 2px 14px rgba(0, 0, 0, 0.95);
+            max-width: 90%;
             pointer-events: none;
             letter-spacing: 1px;
             color: #ffffff;
             z-index: 5;
+            line-height: 1.15;
         }
         
         button {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 14px 45px;
-            font-size: 1.3rem;
+            padding: 16px 55px; /* Slightly bigger button padding to match text */
+            font-size: 1.4rem;
             font-weight: bold;
             cursor: pointer !important;
             border: none;
@@ -68,37 +71,55 @@
             transition: transform 0.1s, background-color 0.2s;
             z-index: 9999 !important; 
             pointer-events: auto !important;
+            margin-bottom: 10px;
         }
         button:hover {
             transform: scale(1.05);
             background-color: #f0f0f0 !important;
         }
 
+        /* Polaroid Gallery Configs */
         .polaroid-gallery {
             display: flex;
-            gap: 20px;
+            gap: 25px; /* Increased gap */
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            margin: 10px 0;
+            margin: 15px 0;
             pointer-events: none;
             width: 100%;
             z-index: 4;
         }
         .polaroid {
             background: white;
-            padding: 12px 12px 25px 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            padding: 15px 15px 30px 15px; /* More white border space */
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
             border-radius: 2px;
             transform: rotate(var(--r));
             opacity: 0;
         }
+        
+        /* Made the images inside the polaroids significantly bigger */
         .polaroid img {
-            width: 160px;
-            height: 140px;
+            width: 230px;  /* Bumped up from 150px */
+            height: 200px; /* Bumped up from 130px */
             object-fit: cover;
             display: block;
             border: 1px solid #ddd;
+        }
+
+        /* Mobile Adjustments for Polaroids so they don't clip off small screens */
+        @media (max-width: 600px) {
+            .polaroid img {
+                width: 150px;
+                height: 130px;
+            }
+            .polaroid {
+                padding: 10px 10px 22px 10px;
+            }
+            h1, p {
+                font-size: calc(1.8rem + 2vw); /* Balances readability on phones */
+            }
         }
 
         .neon-glow {
@@ -163,17 +184,18 @@
                 <img src="game.png" alt="Game" onerror="this.src=''">
             </div>
         </div>
-        <h1 id="p2-subtext" style="opacity: 0; font-size: 2.8rem;">I had so much fun brawl clutching and make music tgt!!!</h1>
+        <h1 id="p2-subtext" style="opacity: 0; font-size: calc(1.6rem + 1.8vw);">I had so much fun brawl clutching and make music tgt!!</h1>
         <button id="enterBtn2" style="display: none;">enter</button>
     </div>
 
-    <div id="page3" class="page" style="background-image: url('flower.png'); justify-content: center; gap: 40px;">
-        <h1 class="fade-in neon-glow">Are u ready for biligual dalgggiiiiii!!!!</h1>
+    <div id="page3" class="page" style="background-image: url('flower.png'); justify-content: center; gap: 25px;">
+        <h1 class="fade-in neon-glow">Are u ready for biligual dalgggii!!!</h1>
+        <img src="cry.png" alt="cry emoji" onerror="this.style.display='none'" style="max-height: 180px; width: auto; object-fit: contain; z-index: 4; pointer-events: none;">
         <button id="enterBtn3">enter</button>
     </div>
-<img src="cry.png" alt="we" onerror="this.src=''">
+
     <div id="page4" class="page" style="background-image: url('letter.png'); justify-content: flex-end; cursor: pointer;">
-        <p style="font-size: 1.8rem; text-shadow: 2px 2px 5px #000; opacity: 0.8; margin-bottom: 20px;">(tap screen to continue)</p>
+        <p style="font-size: calc(1.4rem + 1vw); text-shadow: 2px 2px 5px #000; opacity: 0.8; margin-bottom: 20px;">(tap screen to continue)</p>
     </div>
 
     <div id="page5" class="page" style="background-image: url('cat.png'); justify-content: center; gap: 30px;">
@@ -201,13 +223,11 @@
             if (nextEl) nextEl.classList.add('active');
 
             try {
-                // Page 2 Triggers (Plays music and starts polaroids)
                 if (currentPage === 2) {
                     const m1 = document.getElementById('music1');
                     if (m1) m1.play().catch(e => console.log("Audio block bypassed"));
                     triggerPolaroids();
                 }
-                // Page 6 Triggers (Swaps to second song and plays storm)
                 if (currentPage === 6) {
                     const m1 = document.getElementById('music1');
                     const m2 = document.getElementById('music2');
@@ -220,7 +240,7 @@
             }
         }
 
-        // --- Multi-Device Responsive Listeners ---
+        // Bindings
         const binds = [
             { id: 'enterBtn1', action: nextPage },
             { id: 'enterBtn2', action: nextPage },
@@ -259,7 +279,7 @@
             }, 2700);
         }
 
-        // Click Burst System
+        // Particle Burst
         const burstBtn = document.getElementById('burstBtn');
         if (burstBtn) {
             const burstAction = () => {
@@ -298,7 +318,7 @@
             burstBtn.addEventListener('touchstart', (e) => { e.preventDefault(); burstAction(); });
         }
 
-        // Snow Storm
+        // Snow Machine
         function startSnowstorm() {
             const page6 = document.getElementById('page6');
             if (!page6) return;
