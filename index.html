@@ -33,22 +33,20 @@
             background-position: center;
             background-repeat: no-repeat;
             padding: 20px;
-            cursor: pointer; /* Makes it clear they can click the screen */
+            cursor: pointer;
         }
         .active {
             display: flex;
         }
-        /* Text styling with a text-shadow to make it readable over backgrounds */
         h1, p {
             font-size: 2.5rem;
             font-weight: bold;
             margin-bottom: 20px;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
             max-width: 80%;
-            pointer-events: none; /* prevents text from blocking clicks */
+            pointer-events: none;
             animation: fadeIn 1s ease-in-out forwards;
         }
-        /* Buttons */
         button {
             padding: 15px 40px;
             font-size: 1.5rem;
@@ -67,7 +65,6 @@
             transform: scale(1.05);
             background-color: #e0e0e0;
         }
-        /* Page 2 Image Grid */
         .img-container {
             display: flex;
             gap: 15px;
@@ -83,7 +80,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             animation: fadeIn 1s ease-in-out forwards;
         }
-        /* Snowflake Animation for Page 5 */
         .snowflake {
             position: absolute;
             top: -10px;
@@ -105,6 +101,8 @@
     </style>
 </head>
 <body>
+
+    <audio id="bgMusic" src="music.mp3" loop></audio>
 
     <div id="page1" class="page active" style="background-image: url('background.png'); cursor: default;">
         <h1>to wasang ponger before u go i wana give u a little surprise :p press whwen ur readyy</h1>
@@ -128,7 +126,7 @@
     </div>
 
     <div id="page4" class="page" style="background-image: url('letter.png');">
-        </div>
+    </div>
 
     <div id="page5" class="page" style="background-image: url('cat.png'); cursor: default;">
         <button id="enterBtn5" style="display: none;">enter</button>
@@ -142,71 +140,58 @@
         let currentPage = 1;
         const totalPages = 6;
 
-        // Function to navigation to next page
         function nextPage() {
-            if (currentPage >= totalPages) return; // Stop at last page
+            if (currentPage >= totalPages) return;
             
-            // Hide current page
             document.getElementById(`page${currentPage}`).classList.remove('active');
-            
-            // Advance page count
             currentPage++;
             
-            // Show next page
             const nextPg = document.getElementById(`page${currentPage}`);
             nextPg.classList.add('active');
 
-            // Trigger specific page events
             if (currentPage === 5) {
                 startSnowing();
-                // Pop up the enter button after a tiny delay on page 5
                 setTimeout(() => {
                     document.getElementById('enterBtn5').style.display = 'block';
                 }, 800);
             }
         }
-
-        // --- Navigation Logic ---
         
-        // Page 1: Click the enter button
+        // Page 1: Click button to start music and move forward
         document.getElementById('enterBtn1').addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevents double triggers
+            e.stopPropagation();
+            
+            // Audio Trigger
+            const music = document.getElementById('bgMusic');
+            music.play().catch(err => console.log("Audio block bypass failed:", err));
+            
             nextPage();
         });
 
-        // Page 2: Click anywhere on screen to go to Page 3
         document.getElementById('page2').addEventListener('click', nextPage);
-
-        // Page 3: Click anywhere on screen to go to Page 4
         document.getElementById('page3').addEventListener('click', nextPage);
-
-        // Page 4: Click anywhere on screen to go to Page 5
         document.getElementById('page4').addEventListener('click', nextPage);
 
-        // Page 5: Click the enter button specifically to go to Page 6
         document.getElementById('enterBtn5').addEventListener('click', (e) => {
             e.stopPropagation();
             nextPage();
         });
 
-
-        // --- Page 5 Snow Effect ---
         function startSnowing() {
             const page5 = document.getElementById('page5');
             setInterval(() => {
-                if (currentPage !== 5) return; // Stop creating snow if they leave page 5
+                if (currentPage !== 5) return;
                 
                 const snowflake = document.createElement('div');
                 snowflake.classList.add('snowflake');
                 snowflake.innerHTML = '❄';
                 snowflake.style.left = Math.random() * 100 + 'vw';
-                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // Between 2-5 seconds
+                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
                 snowflake.style.opacity = Math.random();
                 snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
                 
                 page5.appendChild(snowflake);
                 
-                // Clean up snowflakes after they fall
                 setTimeout(() => {
                     snowflake.remove();
                 }, 5000);
