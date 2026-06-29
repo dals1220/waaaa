@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Wasang Ponger :p</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Cursive', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+        }
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 20px;
+            cursor: pointer; /* Makes it clear they can click the screen */
+        }
+        .active {
+            display: flex;
+        }
+        /* Text styling with a text-shadow to make it readable over backgrounds */
+        h1, p {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            max-width: 80%;
+            pointer-events: none; /* prevents text from blocking clicks */
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        /* Buttons */
+        button {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 30px;
+            background-color: #ffffff;
+            color: #000000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background-color 0.2s;
+            z-index: 10;
+            pointer-events: auto;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background-color: #e0e0e0;
+        }
+        /* Page 2 Image Grid */
+        .img-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+            pointer-events: none;
+        }
+        .img-container img {
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        /* Snowflake Animation for Page 5 */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            font-size: 1em;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) translateX(20px);
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="page active" style="background-image: url('background.png'); cursor: default;">
+        <h1>to wasang ponger before u go i wana give u a little surprise :p press whwen ur readyy</h1>
+        <button id="enterBtn1">enter</button>
+    </div>
+
+    <div id="page2" class="page">
+        <div class="img-container">
+            <img src="brawlstar1.png" alt="Brawl Stars 1">
+            <img src="brawlstar2.png" alt="Brawl Stars 2">
+            <img src="game.png" alt="Game">
+        </div>
+        <h1>ngl I'll miss playing and making music with uuu</h1>
+        <div class="img-container">
+            <img src="cry.png" alt="Cry">
+        </div>
+    </div>
+
+    <div id="page3" class="page" style="background-image: url('flower.png');">
+        <h1>beholddd biligual dalgs</h1>
+    </div>
+
+    <div id="page4" class="page" style="background-image: url('letter.png');">
+        </div>
+
+    <div id="page5" class="page" style="background-image: url('cat.png'); cursor: default;">
+        <button id="enterBtn5" style="display: none;">enter</button>
+    </div>
+
+    <div id="page6" class="page" style="background-image: url('kesh.png');">
+        <h1>all the best, see you soooon!!!! :&gt;</h1>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 6;
+
+        // Function to navigation to next page
+        function nextPage() {
+            if (currentPage >= totalPages) return; // Stop at last page
+            
+            // Hide current page
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            
+            // Advance page count
+            currentPage++;
+            
+            // Show next page
+            const nextPg = document.getElementById(`page${currentPage}`);
+            nextPg.classList.add('active');
+
+            // Trigger specific page events
+            if (currentPage === 5) {
+                startSnowing();
+                // Pop up the enter button after a tiny delay on page 5
+                setTimeout(() => {
+                    document.getElementById('enterBtn5').style.display = 'block';
+                }, 800);
+            }
+        }
+
+        // --- Navigation Logic ---
+        
+        // Page 1: Click the enter button
+        document.getElementById('enterBtn1').addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevents double triggers
+            nextPage();
+        });
+
+        // Page 2: Click anywhere on screen to go to Page 3
+        document.getElementById('page2').addEventListener('click', nextPage);
+
+        // Page 3: Click anywhere on screen to go to Page 4
+        document.getElementById('page3').addEventListener('click', nextPage);
+
+        // Page 4: Click anywhere on screen to go to Page 5
+        document.getElementById('page4').addEventListener('click', nextPage);
+
+        // Page 5: Click the enter button specifically to go to Page 6
+        document.getElementById('enterBtn5').addEventListener('click', (e) => {
+            e.stopPropagation();
+            nextPage();
+        });
+
+
+        // --- Page 5 Snow Effect ---
+        function startSnowing() {
+            const page5 = document.getElementById('page5');
+            setInterval(() => {
+                if (currentPage !== 5) return; // Stop creating snow if they leave page 5
+                
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.innerHTML = '❄';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // Between 2-5 seconds
+                snowflake.style.opacity = Math.random();
+                snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+                
+                page5.appendChild(snowflake);
+                
+                // Clean up snowflakes after they fall
+                setTimeout(() => {
+                    snowflake.remove();
+                }, 5000);
+            }, 100);
+        }
+    </script>
+</body>
+</html>
