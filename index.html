@@ -19,7 +19,7 @@
             height: 100%;
             font-family: 'Caveat', cursive, sans-serif;
             overflow: hidden;
-            background-color: #111; /* Changed from pure black so you can see if it loads */
+            background-color: #111; /* Charcoal fallback so it's never pitch black */
             color: #ffffff;
             position: relative;
         }
@@ -38,7 +38,7 @@
             background-position: center;
             background-repeat: no-repeat;
             padding: 40px 20px;
-            background-color: #111; /* Fallback color per page */
+            background-color: #111;
         }
         .active {
             display: flex !important;
@@ -72,40 +72,6 @@
             transform: scale(1.05);
             background-color: #e0e0e0;
         }
-
-        .vinyl-container {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 20;
-            cursor: pointer;
-            background: rgba(0,0,0,0.5);
-            padding: 10px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed rgba(255,255,255,0.4);
-        }
-        .vinyl-record {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #111, #333, #111);
-            border: 3px solid #000;
-            position: relative;
-        }
-        .vinyl-record::after {
-            content: '';
-            position: absolute;
-            top: 35%; left: 35%; width: 30%; height: 30%;
-            background: #ff4757;
-            border-radius: 50%;
-        }
-        .spinning {
-            animation: spin 3s linear infinite;
-        }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         .polaroid-gallery {
             display: flex;
@@ -166,7 +132,7 @@
         }
         @keyframes fall { to { transform: translateY(105vh) translateX(30px); } }
 
-        /* Fixed Animations to guarantee execution */
+        /* Guaranteeing animations execute */
         .pop-in { animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards !important; }
         @keyframes popIn { from { opacity: 0; transform: scale(0.6) rotate(var(--r, 0deg)); } to { opacity: 1; transform: scale(1) rotate(var(--r, 0deg)); } }
         
@@ -185,161 +151,7 @@
     </div>
 
     <div id="page2" class="page" style="background-image: url('background.png');">
-        <div class="vinyl-container" id="vinylBtn">
-            <div class="vinyl-record" id="vinylRecord"></div>
-        </div>
         <h1 class="fade-in">a trip down memory laneee</h1>
         <div class="polaroid-gallery">
             <div class="polaroid" id="pol1" style="--r: -6deg;">
-                <img src="brawlstar1.png" alt="Brawl 1">
-            </div>
-            <div class="polaroid" id="pol2" style="--r: 4deg;">
-                <img src="brawlstar2.png" alt="Brawl 2">
-            </div>
-            <div class="polaroid" id="pol3" style="--r: -3deg;">
-                <img src="game.png" alt="Game">
-            </div>
-        </div>
-        <h1 id="p2-subtext" style="opacity: 0; font-size: 2.8rem;">I had so much fun brawl clutching and make music tgt!!!</h1>
-        <button id="enterBtn2" style="display: none;">enter</button>
-    </div>
-
-    <div id="page3" class="page" style="background-image: url('flower.png'); justify-content: center; gap: 40px;">
-        <h1 class="fade-in neon-glow">are u ready for biligual dalgggiiiiii</h1>
-        <button id="enterBtn3">enter</button>
-    </div>
-
-    <div id="page4" class="page" style="background-image: url('letter.png'); justify-content: flex-end; cursor: pointer;">
-        <p style="font-size: 1.8rem; text-shadow: 2px 2px 5px #000; opacity: 0.8; margin-bottom: 20px;">(tap screen to continue)</p>
-    </div>
-
-    <div id="page5" class="page" style="background-image: url('cat.png'); justify-content: center; gap: 30px;">
-        <button id="burstBtn">click!!!</button>
-        <button id="enterBtn5" style="display: none;">enter</button>
-    </div>
-
-    <div id="page6" class="page" style="background-image: url('kesh.png'); justify-content: center;">
-        <h1 class="fade-in" style="animation-duration: 3s !important;">all the best!!! see u soon :&gt; -dalgs</h1>
-    </div>
-
-    <script>
-        let currentPage = 1;
-        const totalPages = 6;
-        
-        const m1 = document.getElementById('music1');
-        const m2 = document.getElementById('music2');
-
-        function nextPage() {
-            if (currentPage >= totalPages) return;
-            
-            document.getElementById(`page${currentPage}`).classList.remove('active');
-            currentPage++;
-            
-            const nextPg = document.getElementById(`page${currentPage}`);
-            nextPg.classList.add('active');
-
-            if (currentPage === 2) {
-                triggerPolaroids();
-            }
-
-            if (currentPage === 6) {
-                m1.pause();
-                m2.volume = 0.4;
-                m2.play().catch(e => console.log("Music 2 auto-play block:", e));
-                startSnowstorm();
-            }
-        }
-
-        // Navigation
-        document.getElementById('enterBtn1').addEventListener('click', nextPage);
-        document.getElementById('enterBtn2').addEventListener('click', nextPage);
-        document.getElementById('enterBtn3').addEventListener('click', nextPage);
-        document.getElementById('page4').addEventListener('click', nextPage);
-        document.getElementById('enterBtn5').addEventListener('click', nextPage);
-
-        // Vinyl Audio Toggle
-        const vinylBtn = document.getElementById('vinylBtn');
-        const vinylRecord = document.getElementById('vinylRecord');
-        
-        vinylBtn.addEventListener('click', () => {
-            if (m1.paused) {
-                m1.play().catch(e => console.log("Audio block bypass:", e));
-                vinylRecord.classList.add('spinning');
-            } else {
-                m1.pause();
-                vinylRecord.classList.remove('spinning');
-            }
-        });
-
-        // Polaroid Popups
-        function triggerPolaroids() {
-            setTimeout(() => { document.getElementById('pol1').classList.add('pop-in'); }, 400);
-            setTimeout(() => { document.getElementById('pol2').classList.add('pop-in'); }, 1000);
-            setTimeout(() => { document.getElementById('pol3').classList.add('pop-in'); }, 1600);
-            
-            setTimeout(() => { 
-                document.getElementById('p2-subtext').classList.add('fade-in');
-            }, 2400);
-
-            setTimeout(() => { 
-                const btn2 = document.getElementById('enterBtn2');
-                btn2.style.display = 'block';
-                btn2.classList.add('fade-in');
-            }, 3400);
-        }
-
-        // Particle Burst
-        const burstBtn = document.getElementById('burstBtn');
-        const particlesList = ['⭐', '✨', '🎵', '🎶', '💖', '🌟'];
-
-        burstBtn.addEventListener('click', () => {
-            const rect = burstBtn.getBoundingClientRect();
-            const x = rect.left + rect.width / 2;
-            const y = rect.top + rect.height / 2;
-
-            for(let i=0; i<15; i++) {
-                const p = document.createElement('div');
-                p.classList.add('particle');
-                p.innerHTML = particlesList[Math.floor(Math.random() * particlesList.length)];
-                p.style.left = x + 'px';
-                p.style.top = y + 'px';
-                
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 120 + 60;
-                p.style.setProperty('--mx', Math.cos(angle) * distance + 'px');
-                p.style.setProperty('--my', Math.sin(angle) * distance + 'px');
-                p.style.setProperty('--rot', Math.random() * 360 + 'deg');
-
-                document.body.appendChild(p);
-                setTimeout(() => p.remove(), 800);
-            }
-
-            setTimeout(() => {
-                const e5 = document.getElementById('enterBtn5');
-                if(e5.style.display === 'none') {
-                    e5.style.display = 'block';
-                    e5.classList.add('fade-in');
-                }
-            }, 300);
-        });
-
-        // Snow Storm
-        function startSnowstorm() {
-            const page6 = document.getElementById('page6');
-            setInterval(() => {
-                if (currentPage !== 6) return;
-                const snowflake = document.createElement('div');
-                snowflake.classList.add('snowflake');
-                snowflake.innerHTML = '❄';
-                snowflake.style.left = Math.random() * 100 + 'vw';
-                snowflake.style.animationDuration = Math.random() * 2.5 + 1.5 + 's';
-                snowflake.style.opacity = Math.random() * 0.7 + 0.3;
-                snowflake.style.fontSize = Math.random() * 12 + 8 + 'px';
-                
-                page6.appendChild(snowflake);
-                setTimeout(() => snowflake.remove(), 4000);
-            }, 60);
-        }
-    </script>
-</body>
-</html>
+                <img src
