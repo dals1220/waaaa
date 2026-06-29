@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Wasang Ponger :p</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    
     <style>
         * {
             box-sizing: border-box;
@@ -13,10 +17,11 @@
         body, html {
             width: 100%;
             height: 100%;
-            font-family: 'Cursive', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Caveat', cursive, sans-serif;
             overflow: hidden;
             background-color: #000;
             color: #fff;
+            position: relative;
         }
         .page {
             position: absolute;
@@ -33,23 +38,24 @@
             background-position: center;
             background-repeat: no-repeat;
             padding: 20px;
-            cursor: pointer;
+            z-index: 2; /* Keeps text above background floats */
         }
         .active {
             display: flex;
         }
         h1, p {
-            font-size: 2.5rem;
+            font-size: 3.5rem; 
             font-weight: bold;
             margin-bottom: 20px;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
             max-width: 80%;
             pointer-events: none;
-            animation: fadeIn 1s ease-in-out forwards;
+            letter-spacing: 1px;
         }
         button {
-            padding: 15px 40px;
-            font-size: 1.5rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 12px 35px;
+            font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
             border: none;
@@ -59,7 +65,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             transition: transform 0.2s, background-color 0.2s;
             z-index: 10;
-            pointer-events: auto;
+            margin-top: 20px;
         }
         button:hover {
             transform: scale(1.05);
@@ -74,129 +80,82 @@
             pointer-events: none;
         }
         .img-container img {
-            max-height: 200px;
+            max-height: 180px;
             object-fit: contain;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            animation: fadeIn 1s ease-in-out forwards;
+            opacity: 0; 
         }
+        
+        /* Floating Elements Container */
+        #floating-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1; /* Sits behind text, in front of background */
+        }
+
+        /* Float Animations */
+        .floater {
+            position: absolute;
+            bottom: -50px;
+            pointer-events: none;
+            animation: floatUp linear forwards;
+        }
+        
+        /* Emoji specific styling */
+        .floater-emoji {
+            font-size: 24px; /* Keeps them small and cute */
+        }
+
+        /* Memoji image specific styling */
+        .floater-memoji {
+            width: 45px; /* Sized perfectly to blend with emojis */
+            height: 45px;
+            object-fit: contain;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sequential pop up animations */
+        .pop-in {
+            animation: popInEffect 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        @keyframes popInEffect {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .fade-in {
+            animation: fadeInEffect 1s ease-in-out forwards;
+        }
+        @keyframes fadeInEffect {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Snowflake Animation for Page 5 */
         .snowflake {
             position: absolute;
             top: -10px;
             color: #fff;
             font-size: 1em;
-            pointer-events: none;
-            z-index: 1;
-            animation: fall linear forwards;
-        }
-        @keyframes fall {
-            to {
-                transform: translateY(105vh) translateX(20px);
-            }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body>
-
-    <audio id="bgMusic" src="music.mp3" loop></audio>
-
-    <div id="page1" class="page active" style="background-image: url('background.png'); cursor: default;">
-        <h1>to wasang ponger before u go i wana give u a little surprise :p press whwen ur readyy</h1>
-        <button id="enterBtn1">enter</button>
-    </div>
-
-    <div id="page2" class="page">
-        <div class="img-container">
-            <img src="brawlstar1.png" alt="Brawl Stars 1">
-            <img src="brawlstar2.png" alt="Brawl Stars 2">
-            <img src="game.png" alt="Game">
-        </div>
-        <h1>ngl I'll miss playing and making music with uuu</h1>
-        <div class="img-container">
-            <img src="cry.png" alt="Cry">
-        </div>
-    </div>
-
-    <div id="page3" class="page" style="background-image: url('flower.png');">
-        <h1>beholddd biligual dalgs</h1>
-    </div>
-
-    <div id="page4" class="page" style="background-image: url('letter.png');">
-    </div>
-
-    <div id="page5" class="page" style="background-image: url('cat.png'); cursor: default;">
-        <button id="enterBtn5" style="display: none;">enter</button>
-    </div>
-
-    <div id="page6" class="page" style="background-image: url('kesh.png');">
-        <h1>all the best, see you soooon!!!! :&gt;</h1>
-    </div>
-
-    <script>
-        let currentPage = 1;
-        const totalPages = 6;
-
-        function nextPage() {
-            if (currentPage >= totalPages) return;
-            
-            document.getElementById(`page${currentPage}`).classList.remove('active');
-            currentPage++;
-            
-            const nextPg = document.getElementById(`page${currentPage}`);
-            nextPg.classList.add('active');
-
-            if (currentPage === 5) {
-                startSnowing();
-                setTimeout(() => {
-                    document.getElementById('enterBtn5').style.display = 'block';
-                }, 800);
-            }
-        }
-        
-        // Page 1: Click button to start music and move forward
-        document.getElementById('enterBtn1').addEventListener('click', (e) => {
-            e.stopPropagation();
-            
-            // Audio Trigger
-            const music = document.getElementById('bgMusic');
-            music.play().catch(err => console.log("Audio block bypass failed:", err));
-            
-            nextPage();
-        });
-
-        document.getElementById('page2').addEventListener('click', nextPage);
-        document.getElementById('page3').addEventListener('click', nextPage);
-        document.getElementById('page4').addEventListener('click', nextPage);
-
-        document.getElementById('enterBtn5').addEventListener('click', (e) => {
-            e.stopPropagation();
-            nextPage();
-        });
-
-        function startSnowing() {
-            const page5 = document.getElementById('page5');
-            setInterval(() => {
-                if (currentPage !== 5) return;
-                
-                const snowflake = document.createElement('div');
-                snowflake.classList.add('snowflake');
-                snowflake.innerHTML = '❄';
-                snowflake.style.left = Math.random() * 100 + 'vw';
-                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-                snowflake.style.opacity = Math.random();
-                snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-                
-                page5.appendChild(snowflake);
-                
-                setTimeout(() => {
-                    snowflake.remove();
-                }, 5000);
-            }, 100);
-        }
-    </script>
-</body>
-</html>
