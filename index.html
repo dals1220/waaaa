@@ -6,7 +6,7 @@
     <title>For Wasang Ponger :p</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght=700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -31,7 +31,7 @@
             height: 100%;
             display: none !important; 
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             text-align: center;
             background-size: cover;
@@ -39,12 +39,14 @@
             background-repeat: no-repeat;
             padding: 40px 20px;
             background-color: #1a1a1a;
+            cursor: pointer; /* Indicates the entire screen is tappable */
+            gap: 25px;
         }
         .active {
             display: flex !important; 
         }
         
-        /* Responsive Typography - Scales beautifully from Mobile to Desktop */
+        /* Responsive Typography */
         h1, p {
             font-size: calc(1.8rem + 2vw); 
             font-weight: bold;
@@ -55,6 +57,18 @@
             color: #ffffff;
             z-index: 5;
             line-height: 1.2;
+        }
+
+        .tap-hint {
+            font-size: calc(1rem + 0.5vw);
+            opacity: 0.6;
+            text-shadow: 1px 1px 5px #000;
+            animation: pulse 1.5s infinite alternate;
+            pointer-events: none;
+        }
+        @keyframes pulse {
+            from { opacity: 0.4; }
+            to { opacity: 0.8; }
         }
         
         button {
@@ -160,9 +174,9 @@
     <audio id="music1" src="music.mp3" loop preload="auto"></audio>
     <audio id="music2" src="music2.mp3" loop preload="auto"></audio>
 
-    <div id="page1" class="page active" style="background-image: url('background.png'); justify-content: center;">
-        <h1 class="fade-in" style="margin-bottom: 40px;">To Wasang Ponger: before u go i wana give u a little surprise :p press when ur readyy (flip ur phone horizontally!) </h1>
-        
+    <div id="page1" class="page active" style="background-image: url('background.png');">
+        <h1 class="fade-in">To Wasang Ponger: before u go i wana give u a little surprise :p press when ur readyy (flip ur phone horizontally!)</h1>
+        <p class="tap-hint">(tap anywhere to begin)</p>
     </div>
 
     <div id="page2" class="page" style="background-image: url('background.png');">
@@ -179,25 +193,25 @@
             </div>
         </div>
         <h1 id="p2-subtext" style="opacity: 0; font-size: calc(1.4rem + 1.5vw);">I had so much fun brawl clutching and make music tgt!!!</h1>
-        
+        <p class="tap-hint">(tap screen to continue)</p>
     </div>
 
-    <div id="page3" class="page" style="background-image: url('flower1.png'); justify-content: center; gap: 25px;">
-        <h1 class="fade-in neon-glow">Are u ready for biligual dalgggii!!</h1>
+    <div id="page3" class="page" style="background-image: url('flower1.png');">
+        <h1 class="fade-in neon-glow">Are u ready for biligual dalggggi!!</h1>
         <img src="cry.png" alt="cry emoji" onerror="this.style.display='none'" style="max-height: 140px; width: auto; object-fit: contain; z-index: 4; pointer-events: none;">
-        <button id="enterBtn3">enter</button>
+        <p class="tap-hint">(tap screen to continue)</p>
     </div>
 
-    <div id="page4" class="page" style="background-image: url('IMG_7701.jpeg'); justify-content: flex-end; cursor: pointer;">
-        <p style="font-size: 1.6rem; text-shadow: 2px 2px 5px #000; opacity: 0.8; margin-bottom: 20px;">(tap screen to continue)</p>
+    <div id="page4" class="page" style="background-image: url('IMG_7701.jpeg');">
+        <p style="font-size: 1.6rem; text-shadow: 2px 2px 5px #000; opacity: 0.8;">(tap screen to continue)</p>
     </div>
 
-    <div id="page5" class="page" style="background-image: url('cat.png'); justify-content: center; gap: 30px;">
+    <div id="page5" class="page" style="background-image: url('cat.png');">
         <button id="burstBtn">click!!!</button>
-        <button id="enterBtn5" style="display: none;">enter</button>
+        <p class="tap-hint">(tap anywhere else to continue)</p>
     </div>
 
-    <div id="page6" class="page" style="background-image: url('kesh.png'); justify-content: center;">
+    <div id="page6" class="page" style="background-image: url('kesh.png');">
         <h1 class="fade-in" style="animation-duration: 3s !important;">I wish all the best for you!!! see you soon:&gt; -dalgs</h1>
     </div>
 
@@ -234,25 +248,24 @@
             }
         }
 
-        // Bindings
-        const binds = [
-            { id: 'enterBtn1', action: nextPage },
-            { id: 'enterBtn2', action: nextPage },
-            { id: 'enterBtn3', action: nextPage },
-            { id: 'page4', action: nextPage },
-            { id: 'enterBtn5', action: nextPage }
-        ];
-
-        binds.forEach(bind => {
-            const el = document.getElementById(bind.id);
-            if (el) {
-                el.addEventListener('click', bind.action);
-                el.addEventListener('touchstart', (e) => {
-                    e.preventDefault(); 
-                    bind.action();
+        // --- Global Screen Tap Navigation System ---
+        for (let i = 1; i <= totalPages; i++) {
+            const pageEl = document.getElementById(`page${i}`);
+            if (pageEl) {
+                const handleTap = (e) => {
+                    // Prevent advancing if the user taps the decorative burst button on Page 5
+                    if (e.target.id === 'burstBtn') return;
+                    nextPage();
+                };
+                
+                pageEl.addEventListener('click', handleTap);
+                pageEl.addEventListener('touchstart', (e) => {
+                    if (e.target.id === 'burstBtn') return;
+                    e.preventDefault(); // Prevents double triggers on phone screens
+                    nextPage();
                 }, { passive: false });
             }
-        });
+        }
 
         // Polaroid Popups
         function triggerPolaroids() {
@@ -263,20 +276,14 @@
             setTimeout(() => { 
                 document.getElementById('p2-subtext')?.classList.add('fade-in');
             }, 1900);
-
-            setTimeout(() => { 
-                const btn2 = document.getElementById('enterBtn2');
-                if (btn2) {
-                    btn2.style.setProperty('display', 'block', 'important');
-                    btn2.classList.add('fade-in');
-                }
-            }, 2700);
         }
 
-        // Particle Burst
+        // Particle Burst System
         const burstBtn = document.getElementById('burstBtn');
         if (burstBtn) {
-            const burstAction = () => {
+            const burstAction = (e) => {
+                e.stopPropagation(); // Stops the page from turning instantly when tapping this button
+                
                 const rect = burstBtn.getBoundingClientRect();
                 const x = rect.left + rect.width / 2;
                 const y = rect.top + rect.height / 2;
@@ -298,18 +305,13 @@
                     document.body.appendChild(p);
                     setTimeout(() => p.remove(), 800);
                 }
-
-                setTimeout(() => {
-                    const e5 = document.getElementById('enterBtn5');
-                    if(e5 && e5.style.display !== 'block') {
-                        e5.style.setProperty('display', 'block', 'important');
-                        e5.classList.add('fade-in');
-                    }
-                }, 200);
             };
 
             burstBtn.addEventListener('click', burstAction);
-            burstBtn.addEventListener('touchstart', (e) => { e.preventDefault(); burstAction(); });
+            burstBtn.addEventListener('touchstart', (e) => { 
+                e.preventDefault(); 
+                burstAction(e); 
+            }, { passive: false });
         }
 
         // Snow Machine
