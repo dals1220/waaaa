@@ -19,8 +19,8 @@
             height: 100%;
             font-family: 'Caveat', cursive, sans-serif;
             overflow: hidden;
-            background-color: #000;
-            color: #fff;
+            background-color: #111; /* Changed from pure black so you can see if it loads */
+            color: #ffffff;
             position: relative;
         }
         .page {
@@ -31,27 +31,29 @@
             height: 100%;
             display: none;
             flex-direction: column;
-            justify-content: space-between; /* Keeps things separated vertically */
+            justify-content: space-between;
             align-items: center;
             text-align: center;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             padding: 40px 20px;
+            background-color: #111; /* Fallback color per page */
         }
         .active {
-            display: flex;
+            display: flex !important;
         }
         h1, p {
             font-size: 3.5rem; 
             font-weight: bold;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
             max-width: 85%;
             pointer-events: none;
             letter-spacing: 1px;
+            color: #ffffff;
+            z-index: 5;
         }
         
-        /* Universal Styled Buttons */
         button {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 12px 40px;
@@ -62,30 +64,28 @@
             border-radius: 30px;
             background-color: #ffffff;
             color: #000000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            transition: transform 0.2s, background-color 0.2s;
             z-index: 10;
         }
         button:hover {
             transform: scale(1.05);
             background-color: #e0e0e0;
-            box-shadow: 0 6px 25px rgba(255,255,255,0.2);
         }
 
-        /* Aesthetic Vinyl Record Icon */
         .vinyl-container {
             position: absolute;
             top: 20px;
             right: 20px;
             z-index: 20;
             cursor: pointer;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.5);
             padding: 10px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px dashed rgba(255,255,255,0.3);
+            border: 2px dashed rgba(255,255,255,0.4);
         }
         .vinyl-record {
             width: 50px;
@@ -93,10 +93,8 @@
             border-radius: 50%;
             background: linear-gradient(45deg, #111, #333, #111);
             border: 3px solid #000;
-            box-shadow: inset 0 0 10px #000, 0 4px 10px rgba(0,0,0,0.5);
             position: relative;
         }
-        /* Center sticker of vinyl */
         .vinyl-record::after {
             content: '';
             position: absolute;
@@ -107,11 +105,8 @@
         .spinning {
             animation: spin 3s linear infinite;
         }
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* Polaroid Gallery Layout */
         .polaroid-gallery {
             display: flex;
             gap: 25px;
@@ -121,14 +116,14 @@
             margin: 10px 0;
             pointer-events: none;
             width: 100%;
+            z-index: 4;
         }
         .polaroid {
             background: white;
             padding: 12px 12px 25px 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             border-radius: 2px;
-            transform: rotate(var(--r)); /* Custom rotational tilt */
-            transition: transform 0.3s;
+            transform: rotate(var(--r));
             opacity: 0;
         }
         .polaroid img {
@@ -139,18 +134,16 @@
             border: 1px solid #ddd;
         }
 
-        /* Neon Glow Effect for Text */
         .neon-glow {
             color: #fff;
-            text-shadow: 0 0 5px #fff, 0 0 10px #ff4757, 0 0 20px #ff4757, 0 0 40px #ff4757;
+            text-shadow: 0 0 5px #fff, 0 0 10px #ff4757, 0 0 20px #ff4757;
             animation: pulseGlow 2s infinite alternate;
         }
         @keyframes pulseGlow {
-            from { text-shadow: 0 0 5px #fff, 0 0 10px #ff4757, 0 0 20px #ff4757, 0 0 30px #ff4757; }
-            to { text-shadow: 0 0 10px #fff, 0 0 20px #ff6b81, 0 0 30px #ff6b81, 0 0 50px #ff6b81; }
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #ff4757, 0 0 20px #ff4757; }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #ff6b81, 0 0 35px #ff6b81; }
         }
 
-        /* Burst Particles */
         .particle {
             position: absolute;
             pointer-events: none;
@@ -163,7 +156,6 @@
             100% { transform: translate(var(--mx), var(--my)) scale(1.2) rotate(var(--rot)); opacity: 0; }
         }
 
-        /* Snowflake Animation */
         .snowflake {
             position: absolute;
             top: -10px;
@@ -172,13 +164,182 @@
             z-index: 5;
             animation: fall linear forwards;
         }
-        @keyframes fall {
-            to { transform: translateY(105vh) translateX(30px); }
-        }
+        @keyframes fall { to { transform: translateY(105vh) translateX(30px); } }
 
-        /* Generic Animations */
-        .pop-in { animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards; }
+        /* Fixed Animations to guarantee execution */
+        .pop-in { animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards !important; }
         @keyframes popIn { from { opacity: 0; transform: scale(0.6) rotate(var(--r, 0deg)); } to { opacity: 1; transform: scale(1) rotate(var(--r, 0deg)); } }
         
-        .fade-in { animation: fadeIn 1.5s ease-in-out forwards; }
-        @keyframes fadeIn { from {
+        .fade-in { animation: fadeIn 1.2s ease-in-out forwards !important; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <audio id="music1" src="music.mp3" loop preload="auto"></audio>
+    <audio id="music2" src="music2.mp3" loop preload="auto"></audio>
+
+    <div id="page1" class="page active" style="background-image: url('background.png'); justify-content: center;">
+        <h1 class="fade-in" style="margin-bottom: 40px;">to wasang ponger before u go i wana give u a little surprise :p press whwen ur readyy</h1>
+        <button id="enterBtn1">enter</button>
+    </div>
+
+    <div id="page2" class="page" style="background-image: url('background.png');">
+        <div class="vinyl-container" id="vinylBtn">
+            <div class="vinyl-record" id="vinylRecord"></div>
+        </div>
+        <h1 class="fade-in">a trip down memory laneee</h1>
+        <div class="polaroid-gallery">
+            <div class="polaroid" id="pol1" style="--r: -6deg;">
+                <img src="brawlstar1.png" alt="Brawl 1">
+            </div>
+            <div class="polaroid" id="pol2" style="--r: 4deg;">
+                <img src="brawlstar2.png" alt="Brawl 2">
+            </div>
+            <div class="polaroid" id="pol3" style="--r: -3deg;">
+                <img src="game.png" alt="Game">
+            </div>
+        </div>
+        <h1 id="p2-subtext" style="opacity: 0; font-size: 2.8rem;">I had so much fun brawl clutching and make music tgt!!!</h1>
+        <button id="enterBtn2" style="display: none;">enter</button>
+    </div>
+
+    <div id="page3" class="page" style="background-image: url('flower.png'); justify-content: center; gap: 40px;">
+        <h1 class="fade-in neon-glow">are u ready for biligual dalgggiiiiii</h1>
+        <button id="enterBtn3">enter</button>
+    </div>
+
+    <div id="page4" class="page" style="background-image: url('letter.png'); justify-content: flex-end; cursor: pointer;">
+        <p style="font-size: 1.8rem; text-shadow: 2px 2px 5px #000; opacity: 0.8; margin-bottom: 20px;">(tap screen to continue)</p>
+    </div>
+
+    <div id="page5" class="page" style="background-image: url('cat.png'); justify-content: center; gap: 30px;">
+        <button id="burstBtn">click!!!</button>
+        <button id="enterBtn5" style="display: none;">enter</button>
+    </div>
+
+    <div id="page6" class="page" style="background-image: url('kesh.png'); justify-content: center;">
+        <h1 class="fade-in" style="animation-duration: 3s !important;">all the best!!! see u soon :&gt; -dalgs</h1>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 6;
+        
+        const m1 = document.getElementById('music1');
+        const m2 = document.getElementById('music2');
+
+        function nextPage() {
+            if (currentPage >= totalPages) return;
+            
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            currentPage++;
+            
+            const nextPg = document.getElementById(`page${currentPage}`);
+            nextPg.classList.add('active');
+
+            if (currentPage === 2) {
+                triggerPolaroids();
+            }
+
+            if (currentPage === 6) {
+                m1.pause();
+                m2.volume = 0.4;
+                m2.play().catch(e => console.log("Music 2 auto-play block:", e));
+                startSnowstorm();
+            }
+        }
+
+        // Navigation
+        document.getElementById('enterBtn1').addEventListener('click', nextPage);
+        document.getElementById('enterBtn2').addEventListener('click', nextPage);
+        document.getElementById('enterBtn3').addEventListener('click', nextPage);
+        document.getElementById('page4').addEventListener('click', nextPage);
+        document.getElementById('enterBtn5').addEventListener('click', nextPage);
+
+        // Vinyl Audio Toggle
+        const vinylBtn = document.getElementById('vinylBtn');
+        const vinylRecord = document.getElementById('vinylRecord');
+        
+        vinylBtn.addEventListener('click', () => {
+            if (m1.paused) {
+                m1.play().catch(e => console.log("Audio block bypass:", e));
+                vinylRecord.classList.add('spinning');
+            } else {
+                m1.pause();
+                vinylRecord.classList.remove('spinning');
+            }
+        });
+
+        // Polaroid Popups
+        function triggerPolaroids() {
+            setTimeout(() => { document.getElementById('pol1').classList.add('pop-in'); }, 400);
+            setTimeout(() => { document.getElementById('pol2').classList.add('pop-in'); }, 1000);
+            setTimeout(() => { document.getElementById('pol3').classList.add('pop-in'); }, 1600);
+            
+            setTimeout(() => { 
+                document.getElementById('p2-subtext').classList.add('fade-in');
+            }, 2400);
+
+            setTimeout(() => { 
+                const btn2 = document.getElementById('enterBtn2');
+                btn2.style.display = 'block';
+                btn2.classList.add('fade-in');
+            }, 3400);
+        }
+
+        // Particle Burst
+        const burstBtn = document.getElementById('burstBtn');
+        const particlesList = ['⭐', '✨', '🎵', '🎶', '💖', '🌟'];
+
+        burstBtn.addEventListener('click', () => {
+            const rect = burstBtn.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+
+            for(let i=0; i<15; i++) {
+                const p = document.createElement('div');
+                p.classList.add('particle');
+                p.innerHTML = particlesList[Math.floor(Math.random() * particlesList.length)];
+                p.style.left = x + 'px';
+                p.style.top = y + 'px';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 120 + 60;
+                p.style.setProperty('--mx', Math.cos(angle) * distance + 'px');
+                p.style.setProperty('--my', Math.sin(angle) * distance + 'px');
+                p.style.setProperty('--rot', Math.random() * 360 + 'deg');
+
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 800);
+            }
+
+            setTimeout(() => {
+                const e5 = document.getElementById('enterBtn5');
+                if(e5.style.display === 'none') {
+                    e5.style.display = 'block';
+                    e5.classList.add('fade-in');
+                }
+            }, 300);
+        });
+
+        // Snow Storm
+        function startSnowstorm() {
+            const page6 = document.getElementById('page6');
+            setInterval(() => {
+                if (currentPage !== 6) return;
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.innerHTML = '❄';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = Math.random() * 2.5 + 1.5 + 's';
+                snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+                snowflake.style.fontSize = Math.random() * 12 + 8 + 'px';
+                
+                page6.appendChild(snowflake);
+                setTimeout(() => snowflake.remove(), 4000);
+            }, 60);
+        }
+    </script>
+</body>
+</html>
