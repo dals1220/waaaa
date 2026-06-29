@@ -6,7 +6,7 @@
     <title>For Wasang Ponger :p</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght=700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@550;700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -17,7 +17,7 @@
         body, html {
             width: 100%;
             height: 100%;
-            font-family: 'Caveat', cursive, sans-serif;
+            font-family: 'Fredoka', sans-serif; /* Applied new cute font */
             overflow: hidden;
             background-color: #1a1a1a;
             color: #ffffff;
@@ -46,22 +46,22 @@
         
         /* Boosted Universal Word Size */
         h1, p {
-            font-size: calc(2.4rem + 2.2vw); /* Larger, more impactful font size */
-            font-weight: bold;
+            font-size: calc(2.2rem + 2vw); 
+            font-weight: 700;
             text-shadow: 2px 2px 14px rgba(0, 0, 0, 0.95);
             max-width: 90%;
             pointer-events: none;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             color: #ffffff;
             z-index: 5;
-            line-height: 1.15;
+            line-height: 1.25;
         }
         
         button {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 16px 55px; /* Slightly bigger button padding to match text */
+            font-family: 'Fredoka', sans-serif; /* Button matches the cute style */
+            padding: 16px 55px; 
             font-size: 1.4rem;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer !important;
             border: none;
             border-radius: 35px;
@@ -81,7 +81,7 @@
         /* Polaroid Gallery Configs */
         .polaroid-gallery {
             display: flex;
-            gap: 25px; /* Increased gap */
+            gap: 25px; 
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
@@ -92,23 +92,23 @@
         }
         .polaroid {
             background: white;
-            padding: 15px 15px 30px 15px; /* More white border space */
+            padding: 15px 15px 30px 15px; 
             box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-            border-radius: 2px;
+            border-radius: 4px; /* Softened edges to match font style */
             transform: rotate(var(--r));
             opacity: 0;
         }
         
-        /* Made the images inside the polaroids significantly bigger */
+        /* Big polaroids intact */
         .polaroid img {
-            width: 230px;  /* Bumped up from 150px */
-            height: 200px; /* Bumped up from 130px */
+            width: 230px;  
+            height: 200px; 
             object-fit: cover;
             display: block;
             border: 1px solid #ddd;
         }
 
-        /* Mobile Adjustments for Polaroids so they don't clip off small screens */
+        /* Mobile Layout Guard */
         @media (max-width: 600px) {
             .polaroid img {
                 width: 150px;
@@ -118,7 +118,7 @@
                 padding: 10px 10px 22px 10px;
             }
             h1, p {
-                font-size: calc(1.8rem + 2vw); /* Balances readability on phones */
+                font-size: calc(1.6rem + 2vw); 
             }
         }
 
@@ -184,12 +184,12 @@
                 <img src="game.png" alt="Game" onerror="this.src=''">
             </div>
         </div>
-        <h1 id="p2-subtext" style="opacity: 0; font-size: calc(1.6rem + 1.8vw);">I had so much fun brawl clutching and make music tgt!!</h1>
+        <h1 id="p2-subtext" style="opacity: 0; font-size: calc(1.5rem + 1.5vw); font-weight: 550;">I had so much fun brawl clutching and make music tgt!!</h1>
         <button id="enterBtn2" style="display: none;">enter</button>
     </div>
 
     <div id="page3" class="page" style="background-image: url('flower1.png'); justify-content: center; gap: 25px;">
-        <h1 class="fade-in neon-glow">Are u ready for biligual dalgggii!!!</h1>
+        <h1 class="fade-in neon-glow">Are u ready for biligual dalgggi!!!</h1>
         <img src="cry.png" alt="cry emoji" onerror="this.style.display='none'" style="max-height: 180px; width: auto; object-fit: contain; z-index: 4; pointer-events: none;">
         <button id="enterBtn3">enter</button>
     </div>
