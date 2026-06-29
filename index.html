@@ -31,14 +31,13 @@
             height: 100%;
             display: none;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between; /* Keeps things separated vertically */
             align-items: center;
             text-align: center;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            padding: 20px;
-            z-index: 2; /* Keeps text above background floats */
+            padding: 40px 20px;
         }
         .active {
             display: flex;
@@ -46,116 +45,140 @@
         h1, p {
             font-size: 3.5rem; 
             font-weight: bold;
-            margin-bottom: 20px;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-            max-width: 80%;
+            max-width: 85%;
             pointer-events: none;
             letter-spacing: 1px;
         }
+        
+        /* Universal Styled Buttons */
         button {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 12px 35px;
-            font-size: 1.3rem;
+            padding: 12px 40px;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
             border: none;
             border-radius: 30px;
             background-color: #ffffff;
             color: #000000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
             z-index: 10;
-            margin-top: 20px;
         }
         button:hover {
             transform: scale(1.05);
             background-color: #e0e0e0;
+            box-shadow: 0 6px 25px rgba(255,255,255,0.2);
         }
-        .img-container {
+
+        /* Aesthetic Vinyl Record Icon */
+        .vinyl-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 20;
+            cursor: pointer;
+            background: rgba(0,0,0,0.4);
+            padding: 10px;
+            border-radius: 50%;
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+            align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            pointer-events: none;
+            border: 2px dashed rgba(255,255,255,0.3);
         }
-        .img-container img {
-            max-height: 180px;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            opacity: 0; 
+        .vinyl-record {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #111, #333, #111);
+            border: 3px solid #000;
+            box-shadow: inset 0 0 10px #000, 0 4px 10px rgba(0,0,0,0.5);
+            position: relative;
         }
-        
-        /* Floating Elements Container */
-        #floating-container {
+        /* Center sticker of vinyl */
+        .vinyl-record::after {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 35%; left: 35%; width: 30%; height: 30%;
+            background: #ff4757;
+            border-radius: 50%;
+        }
+        .spinning {
+            animation: spin 3s linear infinite;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Polaroid Gallery Layout */
+        .polaroid-gallery {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 10px 0;
+            pointer-events: none;
             width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 1; /* Sits behind text, in front of background */
+        }
+        .polaroid {
+            background: white;
+            padding: 12px 12px 25px 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            border-radius: 2px;
+            transform: rotate(var(--r)); /* Custom rotational tilt */
+            transition: transform 0.3s;
+            opacity: 0;
+        }
+        .polaroid img {
+            width: 170px;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+            border: 1px solid #ddd;
         }
 
-        /* Float Animations */
-        .floater {
+        /* Neon Glow Effect for Text */
+        .neon-glow {
+            color: #fff;
+            text-shadow: 0 0 5px #fff, 0 0 10px #ff4757, 0 0 20px #ff4757, 0 0 40px #ff4757;
+            animation: pulseGlow 2s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #ff4757, 0 0 20px #ff4757, 0 0 30px #ff4757; }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #ff6b81, 0 0 30px #ff6b81, 0 0 50px #ff6b81; }
+        }
+
+        /* Burst Particles */
+        .particle {
             position: absolute;
-            bottom: -50px;
             pointer-events: none;
-            animation: floatUp linear forwards;
+            z-index: 15;
+            font-size: 1.5rem;
+            animation: burstOut 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
         }
-        
-        /* Emoji specific styling */
-        .floater-emoji {
-            font-size: 24px; /* Keeps them small and cute */
-        }
-
-        /* Memoji image specific styling */
-        .floater-memoji {
-            width: 45px; /* Sized perfectly to blend with emojis */
-            height: 45px;
-            object-fit: contain;
+        @keyframes burstOut {
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
+            100% { transform: translate(var(--mx), var(--my)) scale(1.2) rotate(var(--rot)); opacity: 0; }
         }
 
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-110vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Sequential pop up animations */
-        .pop-in {
-            animation: popInEffect 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        @keyframes popInEffect {
-            from { opacity: 0; transform: scale(0.5); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .fade-in {
-            animation: fadeInEffect 1s ease-in-out forwards;
-        }
-        @keyframes fadeInEffect {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Snowflake Animation for Page 5 */
+        /* Snowflake Animation */
         .snowflake {
             position: absolute;
             top: -10px;
             color: #fff;
-            font-size: 1em;
+            pointer-events: none;
+            z-index: 5;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(105vh) translateX(30px); }
+        }
+
+        /* Generic Animations */
+        .pop-in { animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards; }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.6) rotate(var(--r, 0deg)); } to { opacity: 1; transform: scale(1) rotate(var(--r, 0deg)); } }
+        
+        .fade-in { animation: fadeIn 1.5s ease-in-out forwards; }
+        @keyframes fadeIn { from {
