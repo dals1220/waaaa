@@ -1,366 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Wasang Ponger :p</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body, html {
-            width: 100%;
-            height: 100%;
-            font-family: 'Caveat', cursive, sans-serif;
-            overflow: hidden;
-            background-color: #1a1a1a;
-            color: #ffffff;
-            position: relative;
-        }
-        .page {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none !important; 
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            padding: 30px 20px;
-            background-color: #1a1a1a;
-        }
-        .active {
-            display: flex !important; 
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Wasang Ponger :p</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Caveat', cursive, sans-serif;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            position: relative;
+        }
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none !important; 
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 30px 20px;
+            background-color: #1a1a1a;
+        }
+        .active {
+            display: flex !important; 
+        }
+        
+        /* Responsive Typography - Scaled dynamically */
+        h1, p {
+            font-size: calc(1.4rem + 1.5vw); 
+            font-weight: bold;
+            text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
+            max-width: 90%;
+            pointer-events: none;
+            letter-spacing: 1px;
+            color: #ffffff;
+            z-index: 5;
+            line-height: 1.2;
+        }
 
-        /* Special rule for the Letter Page to allow scrolling when flipped */
-        #page4.active {
-            overflow-y: auto !important;
-            display: block !important; /* Block instead of flex allows natural scroll height */
-        }
-        
-        /* Responsive Typography - Scaled dynamically */
-        h1, p {
-            font-size: calc(1.4rem + 1.5vw); 
-            font-weight: bold;
-            text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
-            max-width: 90%;
-            pointer-events: none;
-            letter-spacing: 1px;
-            color: #ffffff;
-            z-index: 5;
-            line-height: 1.2;
-        }
+        .rotate-hint {
+            font-size: calc(1rem + 0.5vw);
+            color: #ff4757;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+            margin-top: 10px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: normal;
+        }
+        
+        button {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 12px 40px;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            font-weight: bold;
+            cursor: pointer !important;
+            border: none;
+            border-radius: 35px;
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+            transition: transform 0.1s, background-color 0.2s;
+            z-index: 9999 !important; 
+            pointer-events: auto !important;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background-color: #f0f0f0 !important;
+        }
 
-        .rotate-hint {
-            font-size: calc(1rem + 0.5vw);
-            color: #ff4757;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-            margin-top: 10px;
-            font-family: 'Segoe UI', sans-serif;
-            font-weight: normal;
-        }
-        
-        button {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 12px 40px;
-            font-size: clamp(0.9rem, 2vw, 1.2rem);
-            font-weight: bold;
-            cursor: pointer !important;
-            border: none;
-            border-radius: 35px;
-            background-color: #ffffff !important;
-            color: #000000 !important;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.6);
-            transition: transform 0.1s, background-color 0.2s;
-            z-index: 9999 !important; 
-            pointer-events: auto !important;
-            margin-bottom: 10px;
-            flex-shrink: 0;
-        }
-        button:hover {
-            transform: scale(1.05);
-            background-color: #f0f0f0 !important;
-        }
+        /* Responsive Polaroid Gallery Layout */
+        .polaroid-gallery {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 5px 0;
+            pointer-events: none;
+            width: 100%;
+            max-width: 800px;
+            z-index: 4;
+        }
+        .polaroid {
+            background: white;
+            padding: 8px 8px 18px 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border-radius: 2px;
+            transform: rotate(var(--r));
+            opacity: 0;
+            transition: transform 0.3s ease;
+        }
+        .polaroid img {
+            width: 20vw;
+            max-width: 140px;
+            min-width: 85px;
+            aspect-ratio: 4 / 3.5;
+            object-fit: cover;
+            display: block;
+            border: 1px solid #ddd;
+        }
 
-        /* Responsive Polaroid Gallery Layout */
-        .polaroid-gallery {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin: 5px 0;
-            pointer-events: none;
-            width: 100%;
-            max-width: 800px;
-            z-index: 4;
-        }
-        .polaroid {
-            background: white;
-            padding: 8px 8px 18px 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            border-radius: 2px;
-            transform: rotate(var(--r));
-            opacity: 0;
-            transition: transform 0.3s ease;
-        }
-        .polaroid img {
-            width: 20vw;
-            max-width: 140px;
-            min-width: 85px;
-            aspect-ratio: 4 / 3.5;
-            object-fit: cover;
-            display: block;
-            border: 1px solid #ddd;
-        }
+        /* Custom Responsive Scaling Rules */
+        @media (max-width: 768px) {
+            .page {
+                padding: 20px 15px;
+            }
+            .polaroid-gallery {
+                gap: 8px;
+            }
+            .polaroid {
+                padding: 5px 5px 14px 5px;
+            }
+        }
 
-        /* Custom Responsive Scaling Rules */
-        @media (max-width: 768px) {
-            .page {
-                padding: 20px 15px;
-            }
-            .polaroid-gallery {
-                gap: 8px;
-            }
-            .polaroid {
-                padding: 5px 5px 14px 5px;
-            }
-        }
+        @media (max-width: 480px) {
+            h1 { font-size: 1.5rem; }
+        }
 
-        @media (max-width: 480px) {
-            h1 { font-size: 1.5rem; }
-        }
+        .neon-glow {
+            color: #fff;
+            text-shadow: 0 0 5px #fff, 0 0 10px #ff4757, 0 0 20px #ff4757;
+            animation: pulseGlow 2s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #ff4757, 0 0 20px #ff4757; }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #ff6b81, 0 0 35px #ff6b81; }
+        }
 
-        .neon-glow {
-            color: #fff;
-            text-shadow: 0 0 5px #fff, 0 0 10px #ff4757, 0 0 20px #ff4757;
-            animation: pulseGlow 2s infinite alternate;
-        }
-        @keyframes pulseGlow {
-            from { text-shadow: 0 0 5px #fff, 0 0 10px #ff4757, 0 0 20px #ff4757; }
-            to { text-shadow: 0 0 10px #fff, 0 0 20px #ff6b81, 0 0 35px #ff6b81; }
-        }
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            z-index: 15;
+            font-size: 1.5rem;
+            animation: burstOut 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+        @keyframes burstOut {
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
+            100% { transform: translate(var(--mx), var(--my)) scale(1.2) rotate(var(--rot)); opacity: 0; }
+        }
 
-        .particle {
-            position: absolute;
-            pointer-events: none;
-            z-index: 15;
-            font-size: 1.5rem;
-            animation: burstOut 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-        }
-        @keyframes burstOut {
-            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
-            100% { transform: translate(var(--mx), var(--my)) scale(1.2) rotate(var(--rot)); opacity: 0; }
-        }
+        /* FIXED: Set z-index higher than text (5) to guarantee full-screen coverage over everything */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            pointer-events: none;
+            z-index: 99; 
+            animation: fall linear forwards;
+        }
+        @keyframes fall { to { transform: translateY(105vh) translateX(30px); } }
 
-        /* FIXED: Set z-index higher than text (5) to guarantee full-screen coverage over everything */
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            color: #fff;
-            pointer-events: none;
-            z-index: 99; 
-            animation: fall linear forwards;
-        }
-        @keyframes fall { to { transform: translateY(105vh) translateX(30px); } }
-
-        .pop-in { animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards !important; }
-        @keyframes popIn { from { opacity: 0; transform: scale(0.6) rotate(var(--r, 0deg)); } to { opacity: 1; transform: scale(1) rotate(var(--r, 0deg)); } }
-        
-        .fade-in { animation: fadeIn 1.2s ease-in-out forwards !important; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
+        .pop-in { animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards !important; }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.6) rotate(var(--r, 0deg)); } to { opacity: 1; transform: scale(1) rotate(var(--r, 0deg)); } }
+        
+        .fade-in { animation: fadeIn 1.2s ease-in-out forwards !important; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
 </head>
 <body>
 
-    <audio id="music1" src="music.mp3" loop preload="auto"></audio>
-    <audio id="music2" src="music2.mp3" loop preload="auto"></audio>
+    <audio id="music1" src="music.mp3" loop preload="auto"></audio>
+    <audio id="music2" src="music2.mp3" loop preload="auto"></audio>
 
-    <div id="page1" class="page active" style="background-image: url('background.png'); justify-content: center; gap: 15px;">
-        <h1 class="fade-in">To Wasang Ponger: before u go i wana give u a little surprise :p press when ur readyy</h1>
-        <p class="rotate-hint fade-in">flip your phone horizontally!</p>
-        <button id="enterBtn1" style="margin-top: 15px;">enter</button>
-    </div>
+    <div id="page1" class="page active" style="background-image: url('background.png'); justify-content: center; gap: 15px;">
+        <h1 class="fade-in">To Wasang Ponger: before u go i wana give u a little surprise :p press when ur readyy</h1>
+        <p class="rotate-hint fade-in">flip your phone horizontally!</p>
+        <button id="enterBtn1" style="margin-top: 15px;">enter</button>
+    </div>
 
-    <div id="page2" class="page" style="background-image: url('background.png'); justify-content: space-between;">
-        <h1 class="fade-in">a trip down memory laneee</h1>
-        <div class="polaroid-gallery">
-            <div class="polaroid" id="pol1" style="--r: -6deg;">
-                <img src="brawlstar1.png" alt="Brawl 1" onerror="this.src=''">
-            </div>
-            <div class="polaroid" id="pol2" style="--r: 4deg;">
-                <img src="brawlstar2.png" alt="Brawl 2" onerror="this.src=''">
-            </div>
-            <div class="polaroid" id="pol3" style="--r: -3deg;">
-                <img src="game.png" alt="Game" onerror="this.src=''">
-            </div>
-        </div>
-        <h1 id="p2-subtext" style="opacity: 0; font-size: calc(1.1rem + 1vw); margin: 5px 0;">I had so much fun brawl clutching and make music tgt!!!</h1>
-        <button id="enterBtn2" style="display: none;">enter</button>
-    </div>
+    <div id="page2" class="page" style="background-image: url('background.png'); justify-content: space-between;">
+        <h1 class="fade-in">a trip down memory laneee</h1>
+        <div class="polaroid-gallery">
+            <div class="polaroid" id="pol1" style="--r: -6deg;">
+                <img src="brawlstar1.png" alt="Brawl 1" onerror="this.src=''">
+            </div>
+            <div class="polaroid" id="pol2" style="--r: 4deg;">
+                <img src="brawlstar2.png" alt="Brawl 2" onerror="this.src=''">
+            </div>
+            <div class="polaroid" id="pol3" style="--r: -3deg;">
+                <img src="game.png" alt="Game" onerror="this.src=''">
+            </div>
+        </div>
+        <h1 id="p2-subtext" style="opacity: 0; font-size: calc(1.1rem + 1vw); margin: 5px 0;">I had so much fun brawl clutching and make music tgt!!!</h1>
+        <button id="enterBtn2" style="display: none;">enter</button>
+    </div>
 
-    <div id="page3" class="page" style="background-image: url('flower1.png'); justify-content: center; gap: 20px;">
-        <h1 class="fade-in neon-glow"> we’ve made amazing memories, I wrote a little something for you to read on your journeyyy 
-            BEHOld bilingual ddalgi 😈 </h1>
-        <img src="cry.png" alt="cry emoji" onerror="this.style.display='none'" style="max-height: 20vh; width: auto; object-fit: contain; z-index: 4; pointer-events: none;">
-        <button id="enterBtn3">enter</button>
-    </div>
+    <div id="page3" class="page" style="background-image: url('flower1.png'); justify-content: center; gap: 20px;">
+        <h1 class="fade-in neon-glow"> we’ve made amazing memories, I wrote a little something for you to read on your journeyyy 
+             BEHOld bilingual ddalgi 😈 </h1>
+        <img src="cry.png" alt="cry emoji" onerror="this.style.display='none'" style="max-height: 20vh; width: auto; object-fit: contain; z-index: 4; pointer-events: none;">
+        <button id="enterBtn3">enter</button>
+    </div>
 
-    <div id="page4" class="page" style="background-image: url('IMG_7698.jpeg'); background-size: 100% auto; background-position: top center; cursor: pointer; min-height: 100%;">
-        <div style="height: 85vh; pointer-events: none;"></div>
-        <p style="font-size: 1.2rem; text-shadow: 2px 2px 5px #000; opacity: 0.8; padding-bottom: 20px; width: 100%; text-align: center;">(scroll to read & tap screen to continue)</p>
-    </div>
+    <div id="page4" class="page" style="background-image: url('IMG_7698.jpeg'); background-size: contain; justify-content: flex-end; cursor: pointer;">
+        <p style="font-size: 1.2rem; text-shadow: 2px 2px 5px #000; opacity: 0.8; margin-bottom: 10px;">(tap screen to continue)</p>
+    </div>
 
-    <div id="page5" class="page" style="background-image: url('cat.png'); justify-content: center; gap: 20px;">
-        <button id="burstBtn">click!!!</button>
-        <button id="enterBtn5" style="display: none;">enter</button>
-    </div>
+    <div id="page5" class="page" style="background-image: url('cat.png'); justify-content: center; gap: 20px;">
+        <button id="burstBtn">click!!!</button>
+        <button id="enterBtn5" style="display: none;">enter</button>
+    </div>
 
-    <div id="page6" class="page" style="background-image: url('kesh.png'); justify-content: center;">
-        <h1 class="fade-in" style="animation-duration: 3s !important;">I wish all the best for you!!! see you soon:&gt; -dalgs</h1>
-    </div>
+    <div id="page6" class="page" style="background-image: url('kesh.png'); justify-content: center;">
+        <h1 class="fade-in" style="animation-duration: 3s !important;">I wish all the best for you!!! see you soon:&gt; -dalgs</h1>
+    </div>
 
-    <script>
-        let currentPage = 1;
-        const totalPages = 6;
+    <script>
+        let currentPage = 1;
+        const totalPages = 6;
 
-        function nextPage() {
-            if (currentPage >= totalPages) return;
-            
-            const currentEl = document.getElementById(`page${currentPage}`);
-            if (currentEl) currentEl.classList.remove('active');
-            
-            currentPage++;
-            
-            const nextEl = document.getElementById(`page${currentPage}`);
-            if (nextEl) nextEl.classList.add('active');
+        function nextPage() {
+            if (currentPage >= totalPages) return;
+            
+            const currentEl = document.getElementById(`page${currentPage}`);
+            if (currentEl) currentEl.classList.remove('active');
+            
+            currentPage++;
+            
+            const nextEl = document.getElementById(`page${currentPage}`);
+            if (nextEl) nextEl.classList.add('active');
 
-            try {
-                if (currentPage === 2) {
-                    const m1 = document.getElementById('music1');
-                    if (m1) m1.play().catch(e => console.log("Audio block bypassed"));
-                    triggerPolaroids();
-                }
-                if (currentPage === 6) {
-                    const m1 = document.getElementById('music1');
-                    const m2 = document.getElementById('music2');
-                    if (m1) m1.pause();
-                    if (m2) { m2.volume = 0.4; m2.play().catch(e => console.log("Audio 2 block bypassed")); }
-                    startSnowstorm();
-                }
-            } catch(err) {
-                console.log("Safe catch running:", err);
-            }
-        }
+            try {
+                if (currentPage === 2) {
+                    const m1 = document.getElementById('music1');
+                    if (m1) m1.play().catch(e => console.log("Audio block bypassed"));
+                    triggerPolaroids();
+                }
+                if (currentPage === 6) {
+                    const m1 = document.getElementById('music1');
+                    const m2 = document.getElementById('music2');
+                    if (m1) m1.pause();
+                    if (m2) { m2.volume = 0.4; m2.play().catch(e => console.log("Audio 2 block bypassed")); }
+                    startSnowstorm();
+                }
+            } catch(err) {
+                console.log("Safe catch running:", err);
+            }
+        }
 
-        // Bindings
-        const binds = [
-            { id: 'enterBtn1', action: nextPage },
-            { id: 'enterBtn2', action: nextPage },
-            { id: 'enterBtn3', action: nextPage },
-            { id: 'page4', action: nextPage },
-            { id: 'enterBtn5', action: nextPage }
-        ];
+        // Bindings
+        const binds = [
+            { id: 'enterBtn1', action: nextPage },
+            { id: 'enterBtn2', action: nextPage },
+            { id: 'enterBtn3', action: nextPage },
+            { id: 'page4', action: nextPage },
+            { id: 'enterBtn5', action: nextPage }
+        ];
 
-        binds.forEach(bind => {
-            const el = document.getElementById(bind.id);
-            if (el) {
-                el.addEventListener('click', bind.action);
-                el.addEventListener('touchstart', (e) => {
-                    e.preventDefault(); 
-                    bind.action();
-                }, { passive: false });
-            }
-        });
+        binds.forEach(bind => {
+            const el = document.getElementById(bind.id);
+            if (el) {
+                el.addEventListener('click', bind.action);
+                el.addEventListener('touchstart', (e) => {
+                    e.preventDefault(); 
+                    bind.action();
+                }, { passive: false });
+            }
+        });
 
-        // Polaroid Popups
-        function triggerPolaroids() {
-            setTimeout(() => { document.getElementById('pol1')?.classList.add('pop-in'); }, 300);
-            setTimeout(() => { document.getElementById('pol2')?.classList.add('pop-in'); }, 800);
-            setTimeout(() => { document.getElementById('pol3')?.classList.add('pop-in'); }, 1300);
-            
-            setTimeout(() => { 
-                document.getElementById('p2-subtext')?.classList.add('fade-in');
-            }, 1900);
+        // Polaroid Popups
+        function triggerPolaroids() {
+            setTimeout(() => { document.getElementById('pol1')?.classList.add('pop-in'); }, 300);
+            setTimeout(() => { document.getElementById('pol2')?.classList.add('pop-in'); }, 800);
+            setTimeout(() => { document.getElementById('pol3')?.classList.add('pop-in'); }, 1300);
+            
+            setTimeout(() => { 
+                document.getElementById('p2-subtext')?.classList.add('fade-in');
+            }, 1900);
 
-            setTimeout(() => { 
-                const btn2 = document.getElementById('enterBtn2');
-                if (btn2) {
-                    btn2.style.setProperty('display', 'block', 'important');
-                    btn2.classList.add('fade-in');
-                }
-            }, 2700);
-        }
+            setTimeout(() => { 
+                const btn2 = document.getElementById('enterBtn2');
+                if (btn2) {
+                    btn2.style.setProperty('display', 'block', 'important');
+                    btn2.classList.add('fade-in');
+                }
+            }, 2700);
+        }
 
-        // Particle Burst
-        const burstBtn = document.getElementById('burstBtn');
-        if (burstBtn) {
-            const burstAction = () => {
-                const rect = burstBtn.getBoundingClientRect();
-                const x = rect.left + rect.width / 2;
-                const y = rect.top + rect.height / 2;
-                const particlesList = ['⭐', '✨', '🎵', '🎶', '💖', '🌟'];
+        // Particle Burst
+        const burstBtn = document.getElementById('burstBtn');
+        if (burstBtn) {
+            const burstAction = () => {
+                const rect = burstBtn.getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                const particlesList = ['⭐', '✨', '🎵', '🎶', '💖', '🌟'];
 
-                for(let i=0; i<15; i++) {
-                    const p = document.createElement('div');
-                    p.classList.add('particle');
-                    p.innerHTML = particlesList[Math.floor(Math.random() * particlesList.length)];
-                    p.style.left = x + 'px';
-                    p.style.top = y + 'px';
-                    
-                    const angle = Math.random() * Math.PI * 2;
-                    const distance = Math.random() * 120 + 60;
-                    p.style.setProperty('--mx', Math.cos(angle) * distance + 'px');
-                    p.style.setProperty('--my', Math.sin(angle) * distance + 'px');
-                    p.style.setProperty('--rot', Math.random() * 360 + 'deg');
+                for(let i=0; i<15; i++) {
+                    const p = document.createElement('div');
+                    p.classList.add('particle');
+                    p.innerHTML = particlesList[Math.floor(Math.random() * particlesList.length)];
+                    p.style.left = x + 'px';
+                    p.style.top = y + 'px';
+                    
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 120 + 60;
+                    p.style.setProperty('--mx', Math.cos(angle) * distance + 'px');
+                    p.style.setProperty('--my', Math.sin(angle) * distance + 'px');
+                    p.style.setProperty('--rot', Math.random() * 360 + 'deg');
 
-                    document.body.appendChild(p);
-                    setTimeout(() => p.remove(), 800);
-                }
+                    document.body.appendChild(p);
+                    setTimeout(() => p.remove(), 800);
+                }
 
-                setTimeout(() => {
-                    const e5 = document.getElementById('enterBtn5');
-                    if(e5 && e5.style.display !== 'block') {
-                        e5.style.setProperty('display', 'block', 'important');
-                        e5.classList.add('fade-in');
-                    }
-                }, 200);
-            };
+                setTimeout(() => {
+                    const e5 = document.getElementById('enterBtn5');
+                    if(e5 && e5.style.display !== 'block') {
+                        e5.style.setProperty('display', 'block', 'important');
+                        e5.classList.add('fade-in');
+                    }
+                }, 200);
+            };
 
-            burstBtn.addEventListener('click', burstAction);
-            burstBtn.addEventListener('touchstart', (e) => { e.preventDefault(); burstAction(); });
-        }
+            burstBtn.addEventListener('click', burstAction);
+            burstBtn.addEventListener('touchstart', (e) => { e.preventDefault(); burstAction(); });
+        }
 
-        // Snow Machine
-        function startSnowstorm() {
-            const page6 = document.getElementById('page6');
-            if (!page6) return;
-            setInterval(() => {
-                if (currentPage !== 6) return;
-                const snowflake = document.createElement('div');
-                snowflake.classList.add('snowflake');
-                snowflake.innerHTML = '❄';
-                snowflake.style.left = Math.random() * 100 + 'vw';
-                snowflake.style.animationDuration = Math.random() * 2.5 + 1.5 + 's';
-                snowflake.style.opacity = Math.random() * 0.7 + 0.3;
-                snowflake.style.fontSize = Math.random() * 12 + 8 + 'px';
-                
-                page6.appendChild(snowflake);
-                setTimeout(() => snowflake.remove(), 4000);
-            }, 60);
-        }
-    </script>
+        // Snow Machine
+        function startSnowstorm() {
+            const page6 = document.getElementById('page6');
+            if (!page6) return;
+            setInterval(() => {
+                if (currentPage !== 6) return;
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.innerHTML = '❄';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = Math.random() * 2.5 + 1.5 + 's';
+                snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+                snowflake.style.fontSize = Math.random() * 12 + 8 + 'px';
+                
+                page6.appendChild(snowflake);
+                setTimeout(() => snowflake.remove(), 4000);
+            }, 60);
+        }
+    </script>
 </body>
-</html>
+</html> can you make the letter png fully visible and not so small when flip phone horizontally 
