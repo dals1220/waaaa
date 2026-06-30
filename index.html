@@ -159,12 +159,13 @@
             100% { transform: translate(var(--mx), var(--my)) scale(1.2) rotate(var(--rot)); opacity: 0; }
         }
 
+        /* FIXED: Set z-index higher than text (5) to guarantee full-screen coverage over everything */
         .snowflake {
             position: absolute;
             top: -10px;
             color: #fff;
             pointer-events: none;
-            z-index: 5;
+            z-index: 99; 
             animation: fall linear forwards;
         }
         @keyframes fall { to { transform: translateY(105vh) translateX(30px); } }
@@ -183,7 +184,7 @@
 
     <div id="page1" class="page active" style="background-image: url('background.png'); justify-content: center; gap: 15px;">
         <h1 class="fade-in">To Wasang Ponger: before u go i wana give u a little surprise :p press when ur readyy</h1>
-        <p class="rotate-hint fade-in">Flip your phone horizontally for the best experience! 📱</p>
+        <p class="rotate-hint fade-in">Flip your phone horizontally</p>
         <button id="enterBtn1" style="margin-top: 15px;">enter</button>
     </div>
 
@@ -205,7 +206,7 @@
     </div>
 
     <div id="page3" class="page" style="background-image: url('flower1.png'); justify-content: center; gap: 20px;">
-        <h1 class="fade-in neon-glow">Are u ready for biligual dalgggiii!!</h1>
+        <h1 class="fade-in neon-glow"> We’ve made amazing memories, I wrote a little something for you to read on your journeyyy BEHOld bilingual ddalgi 😈 </h1>
         <img src="cry.png" alt="cry emoji" onerror="this.style.display='none'" style="max-height: 20vh; width: auto; object-fit: contain; z-index: 4; pointer-events: none;">
         <button id="enterBtn3">enter</button>
     </div>
