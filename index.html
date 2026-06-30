@@ -46,7 +46,7 @@
         
         /* Responsive Typography - Scaled dynamically */
         h1, p {
-            font-size: calc(1.5rem + 1.8vw); 
+            font-size: calc(1.4rem + 1.5vw); 
             font-weight: bold;
             text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
             max-width: 90%;
@@ -56,11 +56,20 @@
             z-index: 5;
             line-height: 1.2;
         }
+
+        .rotate-hint {
+            font-size: calc(1rem + 0.5vw);
+            color: #ff4757;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+            margin-top: 10px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: normal;
+        }
         
         button {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 12px 40px;
-            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
             font-weight: bold;
             cursor: pointer !important;
             border: none;
@@ -72,7 +81,7 @@
             z-index: 9999 !important; 
             pointer-events: auto !important;
             margin-bottom: 10px;
-            flex-shrink: 0; /* Prevents button from squishing on tiny screens */
+            flex-shrink: 0;
         }
         button:hover {
             transform: scale(1.05);
@@ -86,15 +95,15 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            margin: 10px 0;
+            margin: 5px 0;
             pointer-events: none;
             width: 100%;
-            max-width: 900px;
+            max-width: 800px;
             z-index: 4;
         }
         .polaroid {
             background: white;
-            padding: 10px 10px 22px 10px;
+            padding: 8px 8px 18px 8px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             border-radius: 2px;
             transform: rotate(var(--r));
@@ -102,9 +111,9 @@
             transition: transform 0.3s ease;
         }
         .polaroid img {
-            width: 22vw;
-            max-width: 160px;
-            min-width: 95px;
+            width: 20vw;
+            max-width: 140px;
+            min-width: 85px;
             aspect-ratio: 4 / 3.5;
             object-fit: cover;
             display: block;
@@ -117,17 +126,15 @@
                 padding: 20px 15px;
             }
             .polaroid-gallery {
-                gap: 8px; /* Tighter gap on mobile to fit 3 in a row if possible */
+                gap: 8px;
             }
             .polaroid {
-                padding: 6px 6px 16px 6px;
+                padding: 5px 5px 14px 5px;
             }
         }
 
-        @media (max-width: 360px) {
-            /* Extra fine-tuning for exceptionally small phone sizes */
-            h1 { font-size: 1.4rem; }
-            button { padding: 10px 30px; font-size: 0.9rem; }
+        @media (max-width: 480px) {
+            h1 { font-size: 1.5rem; }
         }
 
         .neon-glow {
@@ -174,12 +181,13 @@
     <audio id="music1" src="music.mp3" loop preload="auto"></audio>
     <audio id="music2" src="music2.mp3" loop preload="auto"></audio>
 
-    <div id="page1" class="page active" style="background-image: url('background.png'); justify-content: center;">
-        <h1 class="fade-in" style="margin-bottom: 40px;">To Wasang Ponger: before u go i wana give u a little surprise :p press when ur readyy</h1>
-        <button id="enterBtn1">enter</button>
+    <div id="page1" class="page active" style="background-image: url('background.png'); justify-content: center; gap: 15px;">
+        <h1 class="fade-in">To Wasang Ponger: before u go i wana give u a little surprise :p press when ur readyy</h1>
+        <p class="rotate-hint fade-in">Flip your phone horizontally for the best experience! 📱</p>
+        <button id="enterBtn1" style="margin-top: 15px;">enter</button>
     </div>
 
-    <div id="page2" class="page" style="background-image: url('background.png');">
+    <div id="page2" class="page" style="background-image: url('background.png'); justify-content: space-between;">
         <h1 class="fade-in">a trip down memory laneee</h1>
         <div class="polaroid-gallery">
             <div class="polaroid" id="pol1" style="--r: -6deg;">
@@ -192,7 +200,7 @@
                 <img src="game.png" alt="Game" onerror="this.src=''">
             </div>
         </div>
-        <h1 id="p2-subtext" style="opacity: 0; font-size: calc(1.2rem + 1vw);">I had so much fun brawl clutching and make music tgt!!!</h1>
+        <h1 id="p2-subtext" style="opacity: 0; font-size: calc(1.1rem + 1vw); margin: 5px 0;">I had so much fun brawl clutching and make music tgt!!!</h1>
         <button id="enterBtn2" style="display: none;">enter</button>
     </div>
 
@@ -202,8 +210,8 @@
         <button id="enterBtn3">enter</button>
     </div>
 
-    <div id="page4" class="page" style="background-image: url('IMG_7698.jpeg'); justify-content: flex-end; cursor: pointer;">
-        <p style="font-size: 1.4rem; text-shadow: 2px 2px 5px #000; opacity: 0.8; margin-bottom: 20px;">(tap screen to continue)</p>
+    <div id="page4" class="page" style="background-image: url('IMG_7698.jpeg'); background-size: contain; justify-content: flex-end; cursor: pointer;">
+        <p style="font-size: 1.2rem; text-shadow: 2px 2px 5px #000; opacity: 0.8; margin-bottom: 10px;">(tap screen to continue)</p>
     </div>
 
     <div id="page5" class="page" style="background-image: url('cat.png'); justify-content: center; gap: 20px;">
