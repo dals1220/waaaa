@@ -43,6 +43,12 @@
         .active {
             display: flex !important; 
         }
+
+        /* Special rule for the Letter Page to allow scrolling when flipped */
+        #page4.active {
+            overflow-y: auto !important;
+            display: block !important; /* Block instead of flex allows natural scroll height */
+        }
         
         /* Responsive Typography - Scaled dynamically */
         h1, p {
@@ -206,13 +212,15 @@
     </div>
 
     <div id="page3" class="page" style="background-image: url('flower1.png'); justify-content: center; gap: 20px;">
-        <h1 class="fade-in neon-glow"> We’ve made amazing memories, I wrote a little something for you to read on your journeyyy BEHOld bilingual ddalgi 😈 </h1>
+        <h1 class="fade-in neon-glow"> we’ve made amazing memories, I wrote a little something for you to read on your journeyyy 
+            BEHOld bilingual ddalgi 😈 </h1>
         <img src="cry.png" alt="cry emoji" onerror="this.style.display='none'" style="max-height: 20vh; width: auto; object-fit: contain; z-index: 4; pointer-events: none;">
         <button id="enterBtn3">enter</button>
     </div>
 
-    <div id="page4" class="page" style="background-image: url('IMG_7698.jpeg'); background-size: contain; justify-content: flex-end; cursor: pointer;">
-        <p style="font-size: 1.2rem; text-shadow: 2px 2px 5px #000; opacity: 0.8; margin-bottom: 10px;">(tap screen to continue)</p>
+    <div id="page4" class="page" style="background-image: url('IMG_7698.jpeg'); background-size: 100% auto; background-position: top center; cursor: pointer; min-height: 100%;">
+        <div style="height: 85vh; pointer-events: none;"></div>
+        <p style="font-size: 1.2rem; text-shadow: 2px 2px 5px #000; opacity: 0.8; padding-bottom: 20px; width: 100%; text-align: center;">(scroll to read & tap screen to continue)</p>
     </div>
 
     <div id="page5" class="page" style="background-image: url('cat.png'); justify-content: center; gap: 20px;">
